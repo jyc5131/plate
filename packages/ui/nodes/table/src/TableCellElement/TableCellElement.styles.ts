@@ -1,12 +1,13 @@
+import { Value } from '@udecode/plate-core';
 import { createStyles } from '@udecode/plate-styled-components';
 import { css } from 'styled-components';
 import tw from 'twin.macro';
 import { TableCellElementStyleProps } from './TableCellElement.types';
 
-export const getTableCellElementStyles = (
-  props: TableCellElementStyleProps
+export const getTableCellElementStyles = <V extends Value>(
+  props: TableCellElementStyleProps<V>
 ) => {
-  const { hovered, hideBorder } = props;
+  const { hovered, hideBorder, readOnly } = props;
 
   return createStyles(
     { prefixClassNames: 'TableCellElement', ...props },
@@ -22,7 +23,7 @@ export const getTableCellElementStyles = (
       resizableWrapper: [tw`absolute w-full h-full top-0`],
       handle: [
         tw`absolute`,
-        hovered && tw`bg-blue-500`,
+        !readOnly && hovered && tw`bg-blue-500`,
         css`
           top: -12px;
           right: -2px;

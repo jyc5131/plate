@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { findNodePath, Value } from '@udecode/plate-core';
 import { getRootProps } from '@udecode/plate-styled-components';
 import {
   ELEMENT_TABLE,
@@ -7,13 +8,15 @@ import {
 } from '@udecode/plate-table';
 import clsx from 'clsx';
 import { useAtom } from 'jotai';
-import { Resizable, ResizableProps } from 're-resizable';
-import { ReactEditor } from 'slate-react';
+import { HandleStyles, Resizable, ResizableProps } from 're-resizable';
+import { useReadOnly } from 'slate-react';
 import { hoveredColIndexAtom, resizingColAtom } from '../table.atoms';
 import { getTableCellElementStyles } from './TableCellElement.styles';
 import { TableCellElementProps } from './TableCellElement.types';
 
-export const TableCellElement = (props: TableCellElementProps) => {
+export const TableCellElement = <V extends Value>(
+  props: TableCellElementProps<V>
+) => {
   const {
     attributes,
     children,
@@ -21,15 +24,28 @@ export const TableCellElement = (props: TableCellElementProps) => {
     element,
     resizableProps,
     editor,
+    ignoreReadOnly = false,
   } = props;
 
   const rootProps = getRootProps(props);
+  const readOnly = useReadOnly();
 
   const [hoveredColIndex, setHoveredColIndex] = useAtom(
     hoveredColIndexAtom,
     ELEMENT_TABLE
   );
   const [, setResizingCol] = useAtom(resizingColAtom, ELEMENT_TABLE);
+
+  const handleResize: HandleStyles | undefined =
+    ignoreReadOnly || !readOnly
+      ? {
+          right: {
+            top: -12,
+            height: 'calc(100% + 12px)',
+            zIndex: 20,
+          },
+        }
+      : undefined;
 
   const colIndex = useMemo(
     () => getTableColumnIndex(editor, { node: element }),
@@ -45,6 +61,7 @@ export const TableCellElement = (props: TableCellElementProps) => {
   } = getTableCellElementStyles({
     ...props,
     hovered: hoveredColIndex === colIndex,
+    readOnly: !ignoreReadOnly && readOnly,
   });
 
   const onResize: ResizableProps['onResize'] = (e, direction, ref) => {
@@ -58,7 +75,7 @@ export const TableCellElement = (props: TableCellElementProps) => {
     setTableColSize(
       editor,
       { colIndex, width: ref.offsetWidth },
-      { at: ReactEditor.findPath(editor, element) }
+      { at: findNodePath(editor, element)! }
     );
 
     setResizingCol(null);
@@ -90,14 +107,8 @@ export const TableCellElement = (props: TableCellElementProps) => {
           css={resizable?.css}
           className={resizable?.className}
           size={{ width: '100%', height: '100%' }}
-          enable={{ right: true }}
-          handleStyles={{
-            right: {
-              top: -12,
-              height: 'calc(100% + 12px)',
-              zIndex: 20,
-            },
-          }}
+          enable={{ right: ignoreReadOnly || !readOnly }}
+          handleStyles={handleResize}
           onResize={onResize}
           onResizeStop={onResizeStop}
           {...resizableProps}

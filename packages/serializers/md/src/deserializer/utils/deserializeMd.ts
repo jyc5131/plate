@@ -6,7 +6,7 @@ import {
 } from '@udecode/plate-basic-marks';
 import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
 import { ELEMENT_CODE_BLOCK } from '@udecode/plate-code-block';
-import { getPluginType, PlateEditor } from '@udecode/plate-core';
+import { getPluginType, PlateEditor, Value } from '@udecode/plate-core';
 import {
   ELEMENT_H1,
   ELEMENT_H2,
@@ -15,6 +15,7 @@ import {
   ELEMENT_H5,
   ELEMENT_H6,
 } from '@udecode/plate-heading';
+import { ELEMENT_HR } from '@udecode/plate-horizontal-rule';
 import { ELEMENT_LINK } from '@udecode/plate-link';
 import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
 import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
@@ -26,7 +27,10 @@ import unified from 'unified';
  * Deserialize content from Markdown format to Slate format.
  * `editor` needs
  */
-export const deserializeMd = (editor: PlateEditor, data: string) => {
+export const deserializeMd = <V extends Value>(
+  editor: PlateEditor<V>,
+  data: string
+) => {
   const tree: any = unified()
     .use(markdown)
     .use(slate, {
@@ -43,6 +47,7 @@ export const deserializeMd = (editor: PlateEditor, data: string) => {
         // subscript: getPluginType(editor, MARK_SUBSCRIPT),
         // superscript: getPluginType(editor, MARK_SUPERSCRIPT),
         code_block: getPluginType(editor, ELEMENT_CODE_BLOCK),
+        thematic_break: getPluginType(editor, ELEMENT_HR),
         ul_list: getPluginType(editor, ELEMENT_UL),
         ol_list: getPluginType(editor, ELEMENT_OL),
         listItem: getPluginType(editor, ELEMENT_LI),

@@ -1,5 +1,35 @@
 # @udecode/plate-md-serializer
 
+## 11.0.5
+
+## 11.0.4
+
+## 11.0.3
+
+## 11.0.2
+
+## 11.0.1
+
+## 11.0.0
+
+### Minor Changes
+
+- [#1500](https://github.com/udecode/plate/pull/1500) by [@zbeyens](https://github.com/zbeyens) – updated deps:
+  ```bash
+  "remark-slate": "^1.8.6",
+  "unified": "^9.2.1"
+  ```
+
+## 10.6.0
+
+### Minor Changes
+
+- [#1482](https://github.com/udecode/plate/pull/1482) by [@108EAA0A](https://github.com/108EAA0A) – Deserialization of markdown horizontal rule
+
+## 10.5.3
+
+## 10.5.2
+
 ## 10.5.0
 
 ## 10.4.2

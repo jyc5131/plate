@@ -1,6 +1,6 @@
 {
   "name": "@udecode/plate-ui-popover",
-  "version": "10.5.0",
+  "version": "11.0.5",
   "description": "Popover UI for Plate",
   "keywords": [
     "slate",
@@ -32,16 +32,17 @@
     "test": "jest"
   },
   "dependencies": {
-    "@tippyjs/react": "^4.2.5",
-    "@udecode/plate-core": "10.5.0",
-    "@udecode/plate-styled-components": "10.5.0"
+    "@tippyjs/react": "^4.2.6",
+    "@udecode/plate-core": "11.0.5",
+    "@udecode/plate-styled-components": "11.0.5"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
     "slate": ">=0.66.1",
     "slate-history": ">=0.66.0",
-    "slate-react": ">=0.74.2"
+    "slate-react": ">=0.74.2",
+    "styled-components": ">=5.0.0"
   },
   "publishConfig": {
     "access": "public"
