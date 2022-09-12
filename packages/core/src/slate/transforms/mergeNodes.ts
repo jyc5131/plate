@@ -1,6 +1,6 @@
 import { Editor, Element, Path, Range, Text, Transforms } from 'slate';
-import { hasSingleChild } from '../../common/queries/hasSingleChild';
-import { Modify } from '../../common/types/utility/types';
+import { hasSingleChild } from '../../queries/hasSingleChild';
+import { Modify } from '../../types/misc/types';
 import { createPathRef } from '../editor/createPathRef';
 import { createPointRef } from '../editor/createPointRef';
 import { getAboveNode } from '../editor/getAboveNode';
@@ -19,7 +19,7 @@ import { moveNodes } from './moveNodes';
 import { removeNodes } from './removeNodes';
 import { select } from './select';
 
-export type MergeNodesOptions<V extends Value> = Modify<
+export type MergeNodesOptions<V extends Value = Value> = Modify<
   NonNullable<Parameters<typeof Transforms.mergeNodes>[1]>,
   NodeMatchOption<V>
 > & {

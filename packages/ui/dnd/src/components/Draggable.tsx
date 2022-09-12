@@ -21,7 +21,7 @@ export const Draggable = <V extends Value>(props: DraggableProps<V>) => {
 
   const { dropLine, dragRef, isDragging } = useDndBlock({
     id: element.id as string,
-    blockRef: rootRef,
+    nodeRef: rootRef,
   });
 
   const multiDragRef = useMergedRef(dragRef, dragWrapperRef);
@@ -38,24 +38,6 @@ export const Draggable = <V extends Value>(props: DraggableProps<V>) => {
       className={styles.root.className}
       ref={multiRootRef}
     >
-      <div
-        ref={blockRef}
-        css={[
-          ...(styles.blockAndGutter?.css ?? []),
-          ...(styles.block?.css ?? []),
-        ]}
-      >
-        {children}
-
-        {!!dropLine && (
-          <div
-            css={styles.dropLine?.css}
-            className={styles.dropLine?.className}
-            contentEditable={false}
-          />
-        )}
-      </div>
-
       <div
         css={[
           ...(styles.blockAndGutter?.css ?? []),
@@ -81,6 +63,24 @@ export const Draggable = <V extends Value>(props: DraggableProps<V>) => {
             />
           </div>
         </div>
+      </div>
+
+      <div
+        ref={blockRef}
+        css={[
+          ...(styles.blockAndGutter?.css ?? []),
+          ...(styles.block?.css ?? []),
+        ]}
+      >
+        {children}
+
+        {!!dropLine && (
+          <div
+            css={styles.dropLine?.css}
+            className={styles.dropLine?.className}
+            contentEditable={false}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,55 @@
 # @udecode/plate-code-block
 
+## 16.8.0
+
+## 16.5.0
+
+## 16.3.0
+
+## 16.2.0
+
+## 16.1.0
+
+## 16.0.2
+
+## 16.0.0
+
+## 15.0.3
+
+## 15.0.0
+
+## 14.4.2
+
+## 14.0.2
+
+## 14.0.0
+
+## 13.8.0
+
+## 13.7.0
+
+## 13.6.0
+
+## 13.5.0
+
+## 13.1.0
+
+## 11.2.1
+
+## 11.2.0
+
+### Minor Changes
+
+- [#1560](https://github.com/udecode/plate/pull/1560) by [@zbeyens](https://github.com/zbeyens) –
+  - fix: tab / untab when composing with IME
+  - update peerDeps:
+    - `"slate": ">=0.78.0"`
+    - `"slate-react": ">=0.79.0"`
+
+## 11.1.0
+
+## 11.0.6
+
 ## 11.0.5
 
 ## 11.0.4

@@ -1,5 +1,6 @@
 import {
   getAboveNode,
+  Hotkeys,
   KeyboardHandlerReturnType,
   PlateEditor,
   PluginOptions,
@@ -8,9 +9,14 @@ import {
   Value,
   WithPlatePlugin,
 } from '@udecode/plate-core';
-import { getNextTableCell } from './queries/getNextTableCell';
-import { getPreviousTableCell } from './queries/getPreviousTableCell';
-import { getTableCellEntry } from './queries/getTableCellEntry';
+import isHotkey from 'is-hotkey';
+import {
+  getNextTableCell,
+  getPreviousTableCell,
+  getTableEntries,
+} from './queries/index';
+import { moveSelectionFromCell } from './transforms/index';
+import { keyShiftEdges } from './constants';
 
 export const onKeyDownTable = <
   P = PluginOptions,
@@ -20,44 +26,58 @@ export const onKeyDownTable = <
   editor: E,
   { type }: WithPlatePlugin<P, V, E>
 ): KeyboardHandlerReturnType => (e) => {
-  if (e.key === 'Tab') {
-    e.preventDefault();
-    e.stopPropagation();
-    const res = getTableCellEntry(editor, {});
-    if (!res) return;
-    const { tableRow, tableCell } = res;
-    const [, tableCellPath] = tableCell;
-    const shiftTab = e.shiftKey;
-    const tab = !e.shiftKey;
-    if (shiftTab) {
+  const isKeyDown = {
+    'shift+up': isHotkey('shift+up', e),
+    'shift+down': isHotkey('shift+down', e),
+    'shift+left': isHotkey('shift+left', e),
+    'shift+right': isHotkey('shift+right', e),
+  };
+
+  Object.keys(isKeyDown).forEach((key) => {
+    if (isKeyDown[key]) {
+      // if many cells are selected
+      if (
+        moveSelectionFromCell(editor, {
+          reverse: key === 'shift+up',
+          edge: keyShiftEdges[key],
+        })
+      ) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }
+  });
+
+  const isTab = Hotkeys.isTab(editor, e);
+  const isUntab = Hotkeys.isUntab(editor, e);
+  if (isTab || isUntab) {
+    const entries = getTableEntries(editor);
+    if (!entries) return;
+
+    const { row, cell } = entries;
+    const [, cellPath] = cell;
+
+    if (isUntab) {
       // move left with shift+tab
-      const previousCell = getPreviousTableCell(
-        editor,
-        tableCell,
-        tableCellPath,
-        tableRow
-      );
+      const previousCell = getPreviousTableCell(editor, cell, cellPath, row);
       if (previousCell) {
         const [, previousCellPath] = previousCell;
         select(editor, previousCellPath);
       }
-    } else if (tab) {
+    } else if (isTab) {
       // move right with tab
-      const nextCell = getNextTableCell(
-        editor,
-        tableCell,
-        tableCellPath,
-        tableRow
-      );
+      const nextCell = getNextTableCell(editor, cell, cellPath, row);
       if (nextCell) {
         const [, nextCellPath] = nextCell;
         select(editor, nextCellPath);
       }
     }
+
+    e.preventDefault();
+    e.stopPropagation();
   }
 
-  // FIXME: would prefer this as mod+a, but doesn't work
-  if (e.key === 'a' && (e.metaKey || e.ctrlKey)) {
+  if (isHotkey('mod+a', e)) {
     const res = getAboveNode<TElement>(editor, { match: { type } });
     if (!res) return;
 

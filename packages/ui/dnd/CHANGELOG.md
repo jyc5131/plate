@@ -1,5 +1,124 @@
 # @udecode/plate-dnd
 
+## 16.8.0
+
+## 16.6.1
+
+### Patch Changes
+
+- [`4d03e4a`](https://github.com/udecode/plate/commit/4d03e4a42318ed87531b831d585510fcef38f11f) by [@zbeyens](https://github.com/zbeyens) – `Draggable`: Set `gutterLeft` before the block to fix a selection bug.
+
+## 16.5.0
+
+### Patch Changes
+
+- [#1832](https://github.com/udecode/plate/pull/1832) by [@zbeyens](https://github.com/zbeyens) – Fix: `DraggableProps.level` type accepts `null`
+
+## 16.3.0
+
+## 16.2.0
+
+### Patch Changes
+
+- [#1778](https://github.com/udecode/plate/pull/1778) by [@zbeyens](https://github.com/zbeyens) –
+  - `withDraggable`: default `level` option is now 0 as expected
+
+## 16.1.0
+
+## 16.0.2
+
+## 16.0.0
+
+## 15.0.3
+
+## 15.0.0
+
+## 14.4.2
+
+## 14.0.2
+
+## 14.0.0
+
+## 13.8.0
+
+## 13.7.0
+
+## 13.6.0
+
+## 13.5.0
+
+## 13.1.0
+
+## 13.0.0
+
+### Major Changes
+
+- [#1585](https://github.com/udecode/plate/pull/1585) by [@zbeyens](https://github.com/zbeyens) – Moved `react-dnd react-dnd-html5-backend` deps to peer-dependencies. Install these if using `@udecode/plate-ui-dnd`:
+  ```bash
+  yarn install react-dnd react-dnd-html5-backend
+  ```
+
+## 12.0.0
+
+### Major Changes
+
+- [#1579](https://github.com/udecode/plate/pull/1579) by [@zbeyens](https://github.com/zbeyens) – renamed:
+  - `useDndBlock` options:
+    - `blockRef` -> `nodeRef`
+    - `removePreview` -> `preview.disable`
+  - `useDropBlockOnEditor` -> `useDropBlock`
+  - `useDropBlock` options:
+    - `blockRef` -> `nodeRef`
+    - `setDropLine` -> `onChangeDropLine`
+      signature change:
+  - `getHoverDirection`:
+  ```tsx
+  // before
+  (
+    dragItem: DragItemBlock,
+    monitor: DropTargetMonitor,
+    ref: any,
+    hoverId: string
+  )
+  // after
+  {
+    dragItem,
+    id,
+    monitor,
+    nodeRef,
+  }: GetHoverDirectionOptions
+  ```
+
+### Minor Changes
+
+- [#1574](https://github.com/udecode/plate/pull/1574) by [@xakdog](https://github.com/xakdog) – `useDndBlock`: add `previewRef` option to customize the preview
+
+- [#1579](https://github.com/udecode/plate/pull/1579) by [@zbeyens](https://github.com/zbeyens) –
+  - `useDndNode`: `useDndBlock` with:
+    - `type` option. Different types are needed to allow dnd in different structures like tables or lists.
+    - `drag` options
+    - `drop` options
+    - `preview` options
+  - `useDragNode`: `useDragBlock` with `type` option.
+  - `useDropNode`: `useDropBlock` with `accept` option:
+    - `onDropNode` called on drop
+    - `onHoverNode` called on hover
+
+## 11.2.1
+
+### Patch Changes
+
+- [#1567](https://github.com/udecode/plate/pull/1567) by [@zbeyens](https://github.com/zbeyens) –
+  - upgrade deps:
+    - `"react-dnd": "^16.0.1"`
+    - `"react-dnd-html5-backend": "^16.0.1"`
+
+## 11.2.0
+
+## 11.1.0
+
+## 11.0.6
+
 ## 11.0.5
 
 ## 11.0.4

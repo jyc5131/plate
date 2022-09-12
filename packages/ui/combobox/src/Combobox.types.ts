@@ -20,10 +20,11 @@ export interface ComboboxStyles {
 
 export interface ComboboxItemProps<TData> {
   item: TComboboxItem<TData>;
+  search: string;
 }
 
 export interface ComboboxProps<TData = NoData>
-  extends Partial<Pick<ComboboxState<TData>, 'items'>>,
+  extends Partial<Pick<ComboboxState<TData>, 'items' | 'floatingOptions'>>,
     ComboboxStateById<TData>,
     StyledProps<ComboboxStyles> {
   /**
@@ -36,4 +37,6 @@ export interface ComboboxProps<TData = NoData>
    * @default text
    */
   onRenderItem?: RenderFunction<ComboboxItemProps<TData>>;
+
+  portalElement?: Element;
 }

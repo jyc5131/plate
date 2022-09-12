@@ -1,5 +1,115 @@
 # @udecode/plate-list
 
+## 16.8.0
+
+## 16.6.1
+
+### Patch Changes
+
+- [#1842](https://github.com/udecode/plate/pull/1842) by [@zbeyens](https://github.com/zbeyens) – `moveListItems` should return a boolean (whether it has been moved)
+
+## 16.5.0
+
+## 16.4.2
+
+### Patch Changes
+
+- [#1816](https://github.com/udecode/plate/pull/1816) by [@zbeyens](https://github.com/zbeyens) – Fixes #1817
+
+## 16.4.1
+
+### Patch Changes
+
+- [#1804](https://github.com/udecode/plate/pull/1804) by [@zbeyens](https://github.com/zbeyens) – Fixes #1803
+
+## 16.3.0
+
+## 16.2.0
+
+## 16.1.0
+
+## 16.0.2
+
+## 16.0.0
+
+## 15.0.6
+
+### Patch Changes
+
+- [#1728](https://github.com/udecode/plate/pull/1728) by [@dylans](https://github.com/dylans) – Retain order of blocks when converting to a list
+
+## 15.0.3
+
+## 15.0.0
+
+## 14.4.3
+
+### Patch Changes
+
+- [#1693](https://github.com/udecode/plate/pull/1693) by [@zbeyens](https://github.com/zbeyens) – fix: list plugin was preventing default event even when selection was not containing any list node
+
+## 14.4.2
+
+## 14.4.0
+
+### Minor Changes
+
+- [#1676](https://github.com/udecode/plate/pull/1676) by [@zakishaheen](https://github.com/zakishaheen) – Allow escape unindent of the first element of a list
+
+## 14.1.0
+
+### Minor Changes
+
+- [#1663](https://github.com/udecode/plate/pull/1663) by [@zakishaheen](https://github.com/zakishaheen) – Allow un-indenting top level list items
+
+## 14.0.2
+
+## 14.0.0
+
+### Minor Changes
+
+- [#1642](https://github.com/udecode/plate/pull/1642) by [@zakishaheen](https://github.com/zakishaheen) – Improved list item indentation when selection spans across different elements
+
+## 13.8.0
+
+### Patch Changes
+
+- [#1651](https://github.com/udecode/plate/pull/1651) by [@davisg123](https://github.com/davisg123) – Some types of nested lists are not unwrapped completely
+
+## 13.7.0
+
+## 13.6.0
+
+### Patch Changes
+
+- [`42c5ed1`](https://github.com/udecode/plate/commit/42c5ed1a15dfecb7e64fc39ba328c16733472112) by [@zbeyens](https://github.com/zbeyens) – Toggling a nested list that includes paragraph content should toggle all nested list elements
+
+## 13.5.0
+
+## 13.3.1
+
+### Patch Changes
+
+- [#1607](https://github.com/udecode/plate/pull/1607) by [@dylans](https://github.com/dylans) – Fix list deleteBackward with custom type
+
+## 13.1.0
+
+## 11.2.1
+
+## 11.2.0
+
+### Minor Changes
+
+- [#1560](https://github.com/udecode/plate/pull/1560) by [@zbeyens](https://github.com/zbeyens) –
+  - fix: tab / untab when composing with IME
+  - update peerDeps:
+    - `"slate": ">=0.78.0"`
+    - `"slate-react": ">=0.79.0"`
+
+## 11.1.0
+
+## 11.0.6
+
 ## 11.0.5
 
 ## 11.0.4

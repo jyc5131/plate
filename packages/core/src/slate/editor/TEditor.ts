@@ -1,6 +1,6 @@
 import { Editor } from 'slate';
-import { UnknownObject } from '../../common/types/utility/AnyObject';
-import { Modify } from '../../common/types/utility/types';
+import { UnknownObject } from '../../types/misc/AnyObject';
+import { Modify } from '../../types/misc/types';
 import { EElement, EElementOrText, TElement } from '../element/TElement';
 import { TDescendant } from '../node/TDescendant';
 import { ENode, TNode } from '../node/TNode';
@@ -12,7 +12,7 @@ export type Value = TElement[];
 /**
  * A helper type for getting the value of an editor.
  */
-export type ValueOf<E extends TEditor<Value>> = E['children'];
+export type ValueOf<E extends TEditor> = E['children'];
 
 export type TEditor<V extends Value = Value> = Modify<
   Editor,

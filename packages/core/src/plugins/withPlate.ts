@@ -1,10 +1,10 @@
-import { PlateProps } from '../components/Plate';
+import { PlateProps } from '../components/plate/Plate';
 import { TEditor, Value } from '../slate/editor/TEditor';
-import { PlateEditor } from '../types/PlateEditor';
-import { setPlatePlugins } from '../utils/setPlatePlugins';
+import { PlateEditor } from '../types/plate/PlateEditor';
+import { setPlatePlugins } from '../utils/plate/setPlatePlugins';
 
 export interface WithPlateOptions<
-  V extends Value,
+  V extends Value = Value,
   E extends PlateEditor<V> = PlateEditor<V>
 > extends Pick<PlateProps<V, E>, 'id' | 'disableCorePlugins' | 'plugins'> {}
 
@@ -15,7 +15,10 @@ export interface WithPlateOptions<
  * - `key`: random key for the <Slate> component so each time the editor is created, the component resets.
  * - `options`: Plate options
  */
-export const withPlate = <V extends Value, E extends TEditor<V> = TEditor<V>>(
+export const withPlate = <
+  V extends Value = Value,
+  E extends TEditor<V> = TEditor<V>
+>(
   e: E,
   {
     id = 'main',
@@ -26,6 +29,8 @@ export const withPlate = <V extends Value, E extends TEditor<V> = TEditor<V>>(
   let editor = (e as any) as E & PlateEditor<V>;
 
   editor.id = id as string;
+  editor.prevSelection = null;
+  editor.currentKeyboardEvent = null;
 
   if (!editor.key) {
     editor.key = Math.random();

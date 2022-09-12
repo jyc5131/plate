@@ -18,6 +18,7 @@ import {
 import { ELEMENT_HR } from '@udecode/plate-horizontal-rule';
 import { ELEMENT_LINK } from '@udecode/plate-link';
 import { ELEMENT_LI, ELEMENT_OL, ELEMENT_UL } from '@udecode/plate-list';
+import { ELEMENT_IMAGE } from '@udecode/plate-media';
 import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 import markdown from 'remark-parse';
 import slate from 'remark-slate';
@@ -46,6 +47,7 @@ export const deserializeMd = <V extends Value>(
         // underline: getPluginType(editor, MARK_UNDERLINE),
         // subscript: getPluginType(editor, MARK_SUBSCRIPT),
         // superscript: getPluginType(editor, MARK_SUPERSCRIPT),
+        image: getPluginType(editor, ELEMENT_IMAGE),
         code_block: getPluginType(editor, ELEMENT_CODE_BLOCK),
         thematic_break: getPluginType(editor, ELEMENT_HR),
         ul_list: getPluginType(editor, ELEMENT_UL),

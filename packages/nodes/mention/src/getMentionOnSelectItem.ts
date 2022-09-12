@@ -7,7 +7,6 @@ import {
   TComboboxItem,
 } from '@udecode/plate-combobox';
 import {
-  deleteText,
   getBlockAbove,
   getPlugin,
   insertNodes,
@@ -25,7 +24,14 @@ import { ELEMENT_MENTION, ELEMENT_MENTION_INPUT } from './createMentionPlugin';
 import { MentionPlugin, TMentionElement } from './types';
 
 export interface CreateMentionNode<TData extends Data> {
-  (item: TComboboxItem<TData>): TNodeProps<TMentionElement>;
+  (
+    item: TComboboxItem<TData>,
+    meta: CreateMentionNodeMeta
+  ): TNodeProps<TMentionElement>;
+}
+
+export interface CreateMentionNodeMeta {
+  search: string;
 }
 
 export const getMentionOnSelectItem = <TData extends Data = NoData>({
@@ -40,16 +46,18 @@ export const getMentionOnSelectItem = <TData extends Data = NoData>({
   } = getPlugin<MentionPlugin>(editor as any, key);
 
   const pathAbove = getBlockAbove(editor)?.[1];
-  const isBlockEnd =
+  const isBlockEnd = () =>
     editor.selection &&
     pathAbove &&
     isEndPoint(editor, editor.selection.anchor, pathAbove);
 
   withoutNormalizing(editor, () => {
-    // insert a space to fix the bug
-    if (isBlockEnd) {
-      insertText(editor, ' ');
-    }
+    // Selectors are sensitive to operations, it's better to create everything
+    // before the editor state is changed. For example, asking for text after
+    // removeNodes below will return null.
+    const props = createMentionNode!(item, {
+      search: comboboxSelectors.text() ?? '',
+    });
 
     select(editor, targetRange);
 
@@ -59,8 +67,6 @@ export const getMentionOnSelectItem = <TData extends Data = NoData>({
       })
     );
 
-    const props = createMentionNode!(item);
-
     insertNodes<TMentionElement>(editor, {
       type,
       children: [{ text: '' }],
@@ -68,12 +74,12 @@ export const getMentionOnSelectItem = <TData extends Data = NoData>({
     } as TMentionElement);
 
     // move the selection after the element
-    moveSelection(editor);
+    moveSelection(editor, { unit: 'offset' });
 
-    // delete the inserted space
-    if (isBlockEnd && !insertSpaceAfterMention) {
-      deleteText(editor);
+    if (isBlockEnd() && insertSpaceAfterMention) {
+      insertText(editor, ' ');
     }
   });
+
   return comboboxActions.reset();
 };

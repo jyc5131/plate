@@ -1,8 +1,8 @@
+import { usePlateId } from '../../atoms/plateIdAtom';
 import { Value } from '../../slate/editor/TEditor';
-import { PlateEditor } from '../../types/PlateEditor';
-import { PlateStoreApi } from '../../types/PlateStore';
+import { PlateEditor } from '../../types/plate/PlateEditor';
+import { PlateStoreApi } from '../../types/plate/PlateStore';
 import { getEventEditorId } from '../event-editor/selectors/getEventEditorId';
-import { usePlateId } from './selectors/usePlateId';
 import { createPlateStore } from './createPlateStore';
 import { platesStore } from './platesStore';
 
@@ -11,7 +11,7 @@ const loadingStore = createPlateStore({
 });
 
 export const getPlateStore = <
-  V extends Value,
+  V extends Value = Value,
   E extends PlateEditor<V> = PlateEditor<V>
 >(
   id?: string
@@ -24,7 +24,7 @@ export const getPlateStore = <
 };
 
 export const usePlateStore = <
-  V extends Value,
+  V extends Value = Value,
   E extends PlateEditor<V> = PlateEditor<V>
 >(
   id?: string

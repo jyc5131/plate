@@ -1,5 +1,5 @@
-import { Node } from 'slate';
-import { Modify } from '../../common/types/utility/types';
+import { Node, NodeElementsOptions } from 'slate';
+import { Modify } from '../../types/misc/types';
 import { ElementOf } from '../element/TElement';
 import { TNode } from './TNode';
 import { TElementEntry, TNodeEntry } from './TNodeEntry';
@@ -15,7 +15,7 @@ export const getNodeElements = <
 >(
   root: R,
   options?: Modify<
-    NonNullable<Parameters<typeof Node.elements>[1]>,
+    NonNullable<NodeElementsOptions>,
     {
       pass?: (node: TElementEntry<N>) => boolean;
     }

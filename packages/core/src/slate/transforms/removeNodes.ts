@@ -1,9 +1,9 @@
 import { Transforms } from 'slate';
-import { Modify } from '../../common/types/utility/types';
+import { Modify } from '../../types/misc/types';
 import { TEditor, Value } from '../editor/TEditor';
 import { NodeMatchOption } from '../types/NodeMatchOption';
 
-export type RemoveNodesOptions<V extends Value> = Modify<
+export type RemoveNodesOptions<V extends Value = Value> = Modify<
   NonNullable<Parameters<typeof Transforms.removeNodes>[1]>,
   NodeMatchOption<V>
 >;

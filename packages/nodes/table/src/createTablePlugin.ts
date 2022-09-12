@@ -1,5 +1,7 @@
 import { createPluginFactory } from '@udecode/plate-core';
+import { insertTableColumn, insertTableRow } from './transforms/index';
 import { onKeyDownTable } from './onKeyDownTable';
+import { TablePlugin } from './types';
 import { withTable } from './withTable';
 
 export const ELEMENT_TABLE = 'table';
@@ -10,7 +12,7 @@ export const ELEMENT_TD = 'td';
 /**
  * Enables support for tables.
  */
-export const createTablePlugin = createPluginFactory({
+export const createTablePlugin = createPluginFactory<TablePlugin>({
   key: ELEMENT_TABLE,
   isElement: true,
   handlers: {
@@ -18,6 +20,20 @@ export const createTablePlugin = createPluginFactory({
   },
   deserializeHtml: {
     rules: [{ validNodeName: 'TABLE' }],
+  },
+  options: {
+    insertColumn: (e, { fromCell }) => {
+      insertTableColumn(e, {
+        fromCell,
+        disableSelect: true,
+      });
+    },
+    insertRow: (e, { fromRow }) => {
+      insertTableRow(e, {
+        fromRow,
+        disableSelect: true,
+      });
+    },
   },
   withOverrides: withTable,
   plugins: [

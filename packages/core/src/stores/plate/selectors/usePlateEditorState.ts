@@ -1,5 +1,5 @@
 import { Value } from '../../../slate/editor/TEditor';
-import { PlateEditor } from '../../../types/PlateEditor';
+import { PlateEditor } from '../../../types/plate/PlateEditor';
 import { usePlateSelectors } from '../platesStore';
 import { usePlateEditorRef } from './usePlateEditorRef';
 
@@ -7,7 +7,7 @@ import { usePlateEditorRef } from './usePlateEditorRef';
  * Get editor state which is updated on editor change.
  */
 export const usePlateEditorState = <
-  V extends Value,
+  V extends Value = Value,
   E extends PlateEditor<V> = PlateEditor<V>
 >(
   id?: string

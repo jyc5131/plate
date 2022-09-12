@@ -1,5 +1,204 @@
 # @udecode/plate-table
 
+## 16.8.0
+
+## 16.6.0
+
+### Minor Changes
+
+- [#1835](https://github.com/udecode/plate/pull/1835) by [@zbeyens](https://github.com/zbeyens) – New table plugin option: `disableUnsetSingleColSize`. Disable unsetting the first column width when the table has one column. Set it to true if you want to resize the table width when there is only one column. Keep it false if you have a full-width table.
+
+## 16.5.0
+
+### Patch Changes
+
+- [#1832](https://github.com/udecode/plate/pull/1832) by [@zbeyens](https://github.com/zbeyens) – Refactor: use `editor.currentKeyboardEvent`
+
+## 16.4.2
+
+### Patch Changes
+
+- [#1821](https://github.com/udecode/plate/pull/1821) by [@zbeyens](https://github.com/zbeyens) –
+
+  - Fixes #1356
+  - Fixes #1359
+
+- [#1819](https://github.com/udecode/plate/pull/1819) by [@zbeyens](https://github.com/zbeyens) – Fix: https://github.com/udecode/editor-protocol/issues/76
+
+## 16.3.0
+
+### Minor Changes
+
+- [#1796](https://github.com/udecode/plate/pull/1796) by [@zbeyens](https://github.com/zbeyens) –
+  - Fixes #1795
+  - Fixes #1794
+  - Fixes #1793
+  - Fixes #1791
+  - Fixes #1798
+  - `getTableCellEntry`:
+    - renamed to `getTableEntries`
+    - returns `table`, `row`, `cell`
+    - is now working when selecting many blocks in a cell
+  - `moveSelectionFromCell`:
+    - new option `fromOneCell`
+    - should not do anything when `at` is in a single cell, unless `fromOneCell` is `true`
+  - `overrideSelectionFromCell`: Override the new selection if the previous selection and the new one are in different cells
+
+## 16.2.0
+
+### Minor Changes
+
+- [#1778](https://github.com/udecode/plate/pull/1778) by [@zbeyens](https://github.com/zbeyens) –
+  - on delete many cells:
+    - replace cell children by a paragraph then reselect all the selected cells
+  - on get fragment (copy):
+    - copying in a single cell should not copy the table anymore
+  - on insert fragment (paste):
+    - pasting multiple blocks into many selected cells will replace these cells children by the same blocks
+    - replace cell children by a paragraph then reselect all the selected cells
+  - on insert text:
+    - it should delete the cells content by preserving the cells
+  - normalize cells:
+    - wrap cell children in a paragraph if they are texts
+  - normalize selection:
+    - it was easy to destroy the table structure when selection goes beyond a table. The current fix is to normalize the selection so it selects the whole table (see the specs)
+  - specs:
+    - https://github.com/udecode/editor-protocol/issues/63
+    - https://github.com/udecode/editor-protocol/issues/64
+    - https://github.com/udecode/editor-protocol/issues/65
+    - https://github.com/udecode/editor-protocol/issues/66
+    - https://github.com/udecode/editor-protocol/issues/67
+    - https://github.com/udecode/editor-protocol/issues/68
+    - https://github.com/udecode/editor-protocol/issues/69
+
+## 16.1.0
+
+## 16.0.2
+
+## 16.0.0
+
+## 15.0.3
+
+## 15.0.0
+
+### Major Changes
+
+- [#1677](https://github.com/udecode/plate/pull/1677) by [@zbeyens](https://github.com/zbeyens) –
+  - remove `addRow` for `insertTableRow`
+  - remove `addColumn` for `insertTableColumn`
+
+## 14.4.2
+
+## 14.0.2
+
+## 14.0.0
+
+## 13.8.0
+
+## 13.7.0
+
+## 13.6.0
+
+## 13.5.0
+
+## 13.3.0
+
+### Patch Changes
+
+- [#1604](https://github.com/udecode/plate/pull/1604) by [@zbeyens](https://github.com/zbeyens) – fix: table generics
+
+## 13.2.1
+
+### Patch Changes
+
+- [#1600](https://github.com/udecode/plate/pull/1600) by [@dylans](https://github.com/dylans) – apply missing generic
+
+## 13.1.0
+
+## 11.3.1
+
+### Patch Changes
+
+- [#1573](https://github.com/udecode/plate/pull/1573) by [@zbeyens](https://github.com/zbeyens) – Table plugin: add `insertRow`, `insertColumn` options
+
+## 11.3.0
+
+### Minor Changes
+
+- [#1569](https://github.com/udecode/plate/pull/1569) by [@zbeyens](https://github.com/zbeyens) –
+  - https://github.com/udecode/editor-protocol/issues/32
+  - `addRow` deprecated in favor of `insertTableRow`
+  - `addColumn` deprecated in favor of `insertTableColumn`
+  - `insertTableRow` now selects the cell below selected cell (previously it was selecting the last cell)
+
+## 11.2.1
+
+## 11.2.0
+
+### Minor Changes
+
+- [#1560](https://github.com/udecode/plate/pull/1560) by [@zbeyens](https://github.com/zbeyens) –
+  - fix: tab / untab when composing with IME
+  - update peerDeps:
+    - `"slate": ">=0.78.0"`
+    - `"slate-react": ">=0.79.0"`
+
+### Patch Changes
+
+- [#1554](https://github.com/udecode/plate/pull/1554) by [@mrganser](https://github.com/mrganser) – fix onKeyDownTable so it only acts with Tab key when selection is within a table, so default or others handlers can work outside
+
+## 11.1.1
+
+### Patch Changes
+
+- [#1548](https://github.com/udecode/plate/pull/1548) by [@zbeyens](https://github.com/zbeyens) –
+  - fix arrow navigation inside table cell having a block (e.g. paragraph)
+
+## 11.1.0
+
+### Minor Changes
+
+- [#1546](https://github.com/udecode/plate/pull/1546) by [@zbeyens](https://github.com/zbeyens) –
+
+  - `getTableGridAbove`: Get sub table above anchor and focus
+  - `getTableGridByRange`: Get sub table between 2 cell paths.
+  - `moveSelectionFromCell`: Move selection by cell unit.
+  - `getCellTypes`: Get td and th types.
+  - `getEmptyCellNode`, `getEmptyRowNode`, `getEmptyTableNode`: `cellChildren` option
+  - `getEmptyTableNode`: `rowCount`, `colCount` options
+  - `preventDeleteTableCell`
+  - `withDeleteTable`: Prevent cell deletion
+  - `withGetFragmentTable`: If selection is in a table, get subtable above
+  - `withInsertFragmentTable`
+
+  Cell selection:
+
+  - https://github.com/udecode/editor-protocol/issues/26
+  - https://github.com/udecode/editor-protocol/issues/27
+  - https://github.com/udecode/editor-protocol/issues/28
+  - https://github.com/udecode/editor-protocol/issues/29
+  - https://github.com/udecode/editor-protocol/issues/15
+  - https://github.com/udecode/editor-protocol/issues/17
+  - https://github.com/udecode/editor-protocol/issues/30
+  - https://github.com/udecode/editor-protocol/issues/31
+  - https://github.com/udecode/editor-protocol/issues/12
+  - https://github.com/udecode/editor-protocol/issues/25
+  - https://github.com/udecode/editor-protocol/issues/20
+
+  Copy/paste:
+
+  - https://github.com/udecode/editor-protocol/issues/19
+  - https://github.com/udecode/editor-protocol/issues/13
+  - https://github.com/udecode/editor-protocol/issues/14
+
+  Delete:
+
+  - https://github.com/udecode/editor-protocol/issues/21
+  - https://github.com/udecode/editor-protocol/issues/22
+  - https://github.com/udecode/editor-protocol/issues/23
+
+## 11.0.6
+
 ## 11.0.5
 
 ## 11.0.4

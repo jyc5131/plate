@@ -16,7 +16,7 @@ import { Range } from 'slate';
 import { AutoformatBlockRule } from '../types';
 import { getMatchRange } from '../utils/getMatchRange';
 
-export interface AutoformatBlockOptions<V extends Value>
+export interface AutoformatBlockOptions<V extends Value = Value>
   extends AutoformatBlockRule<V> {
   text: string;
 }
@@ -72,7 +72,12 @@ export const autoformatBlock = <V extends Value>(
       if (isBelowSameBlockType) continue;
     }
 
-    deleteText(editor, { at: matchRange });
+    // if the trigger is only 1 char there is nothing to delete, so we'd delete unrelated text
+    if (match.length > 1) {
+      deleteText(editor, {
+        at: matchRange,
+      });
+    }
 
     if (preFormat) {
       preFormat(editor);

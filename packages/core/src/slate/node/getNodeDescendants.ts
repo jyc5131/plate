@@ -1,5 +1,5 @@
-import { Node } from 'slate';
-import { Modify } from '../../common/types/utility/types';
+import { Node, NodeDescendantsOptions } from 'slate';
+import { Modify } from '../../types/misc/types';
 import { DescendantOf } from './TDescendant';
 import { TNode } from './TNode';
 import { TDescendantEntry, TNodeEntry } from './TNodeEntry';
@@ -13,7 +13,7 @@ export const getNodeDescendants = <
 >(
   root: R,
   options?: Modify<
-    NonNullable<Parameters<typeof Node.descendants>[1]>,
+    NonNullable<NodeDescendantsOptions>,
     {
       pass?: (node: TDescendantEntry<N>) => boolean;
     }

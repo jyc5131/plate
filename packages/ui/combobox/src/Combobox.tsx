@@ -10,17 +10,15 @@ import {
   useComboboxControls,
   useComboboxSelectors,
 } from '@udecode/plate-combobox';
+import { useEditorState, useEventEditorSelectors } from '@udecode/plate-core';
 import {
-  isDefined,
-  useEditorState,
-  useEventEditorSelectors,
-} from '@udecode/plate-core';
-import { PortalBody } from '@udecode/plate-styled-components';
-import {
+  flip,
   getRangeBoundingClientRect,
-  usePopperPosition,
-  virtualReference,
-} from '@udecode/plate-ui-popper';
+  offset,
+  shift,
+  useVirtualFloating,
+} from '@udecode/plate-floating';
+import { PortalBody } from '@udecode/plate-styled-components';
 import { getComboboxStyles } from './Combobox.styles';
 import { ComboboxProps } from './Combobox.types';
 
@@ -34,25 +32,24 @@ const ComboboxContent = <TData extends Data = NoData>(
     | 'controlled'
     | 'maxSuggestions'
     | 'filter'
+    | 'sort'
   >
 ) => {
-  const { component: Component, items, onRenderItem } = props;
+  const { component: Component, items, portalElement, onRenderItem } = props;
 
   const targetRange = useComboboxSelectors.targetRange();
   const filteredItems = useComboboxSelectors.filteredItems();
   const highlightedIndex = useComboboxSelectors.highlightedIndex();
-  const popperContainer = useComboboxSelectors.popperContainer?.();
-  const popperOptions = useComboboxSelectors.popperOptions?.();
+  const floatingOptions = useComboboxSelectors.floatingOptions();
   const editor = useEditorState();
   const combobox = useComboboxControls();
   const activeComboboxStore = useActiveComboboxStore()!;
-  const text = useComboboxSelectors.text();
+  const text = useComboboxSelectors.text() ?? '';
   const storeItems = useComboboxSelectors.items();
   const filter = activeComboboxStore.use.filter?.();
+  const sort = activeComboboxStore.use.sort?.();
   const maxSuggestions =
     activeComboboxStore.use.maxSuggestions?.() ?? storeItems.length;
-
-  const popperRef = React.useRef<any>(null);
 
   // Update items
   useEffect(() => {
@@ -61,37 +58,30 @@ const ComboboxContent = <TData extends Data = NoData>(
 
   // Filter items
   useEffect(() => {
-    if (!isDefined(text)) return;
-
-    if (text.length === 0) {
-      return comboboxActions.filteredItems(storeItems.slice(0, maxSuggestions));
-    }
-
-    const _filteredItems = storeItems
-      .filter(
-        filter
-          ? filter(text)
-          : (value) => value.text.toLowerCase().startsWith(text.toLowerCase())
-      )
-      .slice(0, maxSuggestions);
-
-    comboboxActions.filteredItems(_filteredItems);
-  }, [filter, storeItems, maxSuggestions, text]);
+    comboboxActions.filteredItems(
+      storeItems
+        .filter(
+          filter
+            ? filter(text)
+            : (value) => value.text.toLowerCase().startsWith(text.toLowerCase())
+        )
+        .sort(sort?.(text))
+        .slice(0, maxSuggestions)
+    );
+  }, [filter, sort, storeItems, maxSuggestions, text]);
 
   // Get target range rect
   const getBoundingClientRect = useCallback(
-    () => getRangeBoundingClientRect(editor, targetRange) ?? virtualReference,
+    () => getRangeBoundingClientRect(editor, targetRange),
     [editor, targetRange]
   );
 
   // Update popper position
-  const { styles: popperStyles, attributes } = usePopperPosition({
-    popperElement: popperRef.current,
-    popperContainer,
-    popperOptions,
+  const { style, floating } = useVirtualFloating({
     placement: 'bottom-start',
     getBoundingClientRect,
-    offset: [0, 4],
+    middleware: [offset(4), shift(), flip()],
+    ...floatingOptions,
   });
 
   const menuProps = combobox
@@ -103,20 +93,19 @@ const ComboboxContent = <TData extends Data = NoData>(
   );
 
   return (
-    <PortalBody>
+    <PortalBody element={portalElement}>
       <ul
         {...menuProps}
-        ref={popperRef}
-        style={popperStyles.popper}
+        ref={floating}
+        style={style}
         css={root.css}
         className={root.className}
-        {...attributes.popper}
       >
         {Component ? Component({ store: activeComboboxStore }) : null}
 
         {filteredItems.map((item, index) => {
           const Item = onRenderItem
-            ? onRenderItem({ item: item as TComboboxItem<TData> })
+            ? onRenderItem({ search: text, item: item as TComboboxItem<TData> })
             : item.text;
 
           const highlighted = index === highlightedIndex;
@@ -162,12 +151,20 @@ export const Combobox = <TData extends Data = NoData>({
   controlled,
   maxSuggestions,
   filter,
+  sort,
+  floatingOptions,
   ...props
 }: ComboboxProps<TData>) => {
   const editor = useEditorState();
   const focusedEditorId = useEventEditorSelectors.focus?.();
   const combobox = useComboboxControls();
   const activeId = useComboboxSelectors.activeId();
+
+  useEffect(() => {
+    if (floatingOptions) {
+      comboboxActions.floatingOptions(floatingOptions);
+    }
+  }, [floatingOptions]);
 
   useEffect(() => {
     comboboxActions.setComboboxById({
@@ -178,6 +175,7 @@ export const Combobox = <TData extends Data = NoData>({
       onSelectItem,
       maxSuggestions,
       filter,
+      sort,
     });
   }, [
     id,
@@ -187,6 +185,7 @@ export const Combobox = <TData extends Data = NoData>({
     onSelectItem,
     maxSuggestions,
     filter,
+    sort,
   ]);
 
   if (

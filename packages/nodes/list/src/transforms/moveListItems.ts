@@ -1,7 +1,7 @@
 import {
   createPathRef,
-  EditorNodesOptions,
   getNodeEntries,
+  GetNodeEntriesOptions,
   getParentNode,
   getPluginType,
   PlateEditor,
@@ -13,10 +13,12 @@ import { ELEMENT_LIC } from '../createListPlugin';
 import { isListNested } from '../queries/isListNested';
 import { moveListItemDown } from './moveListItemDown';
 import { moveListItemUp } from './moveListItemUp';
+import { removeFirstListItem } from './removeFirstListItem';
 
 export type MoveListItemsOptions = {
   increase?: boolean;
-  at?: EditorNodesOptions<Value>['at'];
+  at?: GetNodeEntriesOptions['at'];
+  enableResetOnShiftTab?: boolean;
 };
 
 export const moveListItems = <V extends Value>(
@@ -24,6 +26,7 @@ export const moveListItems = <V extends Value>(
   {
     increase = true,
     at = editor.selection ?? undefined,
+    enableResetOnShiftTab,
   }: MoveListItemsOptions = {}
 ) => {
   const _nodes = getNodeEntries(editor, {
@@ -61,26 +64,43 @@ export const moveListItems = <V extends Value>(
     ? highestLicPathRefs
     : highestLicPathRefs.reverse();
 
-  withoutNormalizing(editor, () => {
+  return withoutNormalizing(editor, () => {
+    let moved = false;
+
     licPathRefsToMove.forEach((licPathRef) => {
       const licPath = licPathRef.unref();
       if (!licPath) return;
 
       const listItem = getParentNode(editor, licPath);
       if (!listItem) return;
-      const listEntry = getParentNode(editor, listItem[1]);
+
+      const parentList = getParentNode(editor, listItem[1]);
+      if (!parentList) return;
+
+      let _moved: any;
 
       if (increase) {
-        moveListItemDown(editor, {
-          list: listEntry as any,
+        _moved = moveListItemDown(editor, {
+          list: parentList as any,
           listItem: listItem as any,
         });
-      } else if (listEntry && isListNested(editor, listEntry[1])) {
-        moveListItemUp(editor, {
-          list: listEntry as any,
+      } else if (isListNested(editor, parentList[1])) {
+        // un-indent a sub-list item
+        _moved = moveListItemUp(editor, {
+          list: parentList as any,
+          listItem: listItem as any,
+        });
+      } else if (enableResetOnShiftTab) {
+        // unindenting a top level list item, effectively breaking apart the list.
+        _moved = removeFirstListItem(editor, {
+          list: parentList as any,
           listItem: listItem as any,
         });
       }
+
+      moved = _moved || moved;
     });
+
+    return moved;
   });
 };

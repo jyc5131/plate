@@ -1,10 +1,10 @@
 import { Transforms } from 'slate';
-import { Modify } from '../../common/types/utility/types';
+import { Modify } from '../../types/misc/types';
 import { TEditor, Value } from '../editor/TEditor';
 import { EElementOrText } from '../element/TElement';
 import { NodeMatchOption } from '../types/NodeMatchOption';
 
-export type InsertNodesOptions<V extends Value> = Modify<
+export type InsertNodesOptions<V extends Value = Value> = Modify<
   NonNullable<Parameters<typeof Transforms.insertNodes>[2]>,
   NodeMatchOption<V>
 >;

@@ -1,13 +1,14 @@
 import { createHeadingPlugin } from '../../../nodes/heading/src/createHeadingPlugin';
 import { createParagraphPlugin } from '../../../nodes/paragraph/src/createParagraphPlugin';
-import { PlatePlugin } from '../types/plugins/PlatePlugin';
-import { createTEditor } from '../utils/createTEditor';
-import { getPlugin } from '../utils/getPlugin';
+import { PlatePlugin } from '../types/plugin/PlatePlugin';
+import { getPlugin } from '../utils/plate/getPlugin';
+import { createTEditor } from '../utils/slate/createTEditor';
 import { KEY_DESERIALIZE_HTML } from './html-deserializer/createDeserializeHtmlPlugin';
 import { KEY_DESERIALIZE_AST } from './createDeserializeAstPlugin';
 import { KEY_EVENT_EDITOR } from './createEventEditorPlugin';
 import { KEY_INLINE_VOID } from './createInlineVoidPlugin';
 import { KEY_INSERT_DATA } from './createInsertDataPlugin';
+import { KEY_PREV_SELECTION } from './createPrevSelectionPlugin';
 import { withPlate } from './withPlate';
 
 const coreKeys = [
@@ -16,6 +17,7 @@ const coreKeys = [
   KEY_EVENT_EDITOR,
   KEY_INLINE_VOID,
   KEY_INSERT_DATA,
+  KEY_PREV_SELECTION,
   KEY_DESERIALIZE_HTML,
   KEY_DESERIALIZE_AST,
 ];

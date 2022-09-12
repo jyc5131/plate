@@ -1,11 +1,11 @@
 import { Transforms } from 'slate';
-import { Modify } from '../../common/types/utility/types';
+import { Modify } from '../../types/misc/types';
 import { TEditor, Value } from '../editor/TEditor';
 import { unhangRange } from '../editor/unhangRange';
 import { EElement } from '../element/TElement';
 import { NodeMatchOption } from '../types/NodeMatchOption';
 
-export type WrapNodesOptions<V extends Value> = Modify<
+export type WrapNodesOptions<V extends Value = Value> = Modify<
   NonNullable<Parameters<typeof Transforms.wrapNodes>[2]>,
   NodeMatchOption<V>
 >;

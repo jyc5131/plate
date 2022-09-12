@@ -1,13 +1,13 @@
 import { Editor } from 'slate';
-import { getQueryOptions } from '../../common/queries/match';
-import { ENodeMatchOptions } from '../../common/types/Editor.types';
-import { Modify } from '../../common/types/utility/types';
-import { EAncestor } from '../node/TAncestor';
+import { EditorAboveOptions } from 'slate/dist/interfaces/editor';
+import { ENodeMatchOptions, getQueryOptions } from '../../queries/match';
+import { Modify } from '../../types/misc/types';
+import { EAncestor, TAncestor } from '../node/TAncestor';
 import { TNodeEntry } from '../node/TNodeEntry';
 import { TEditor, Value } from './TEditor';
 
-export type GetAboveNodeOptions<V extends Value> = Modify<
-  NonNullable<Parameters<typeof Editor.above>[1]>,
+export type GetAboveNodeOptions<V extends Value = Value> = Modify<
+  NonNullable<EditorAboveOptions<TAncestor>>,
   ENodeMatchOptions<V>
 >;
 

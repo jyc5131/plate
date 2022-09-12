@@ -1,16 +1,19 @@
 import { getPluginType, PlateEditor, Value } from '@udecode/plate-core';
 import { ELEMENT_TR } from '../createTablePlugin';
-import { TablePluginOptions } from '../types';
-import { getEmptyCellNode } from './getEmptyCellNode';
+import { getEmptyCellNode, GetEmptyCellNodeOptions } from './getEmptyCellNode';
+
+export interface GetEmptyRowNodeOptions extends GetEmptyCellNodeOptions {
+  colCount?: number;
+}
 
 export const getEmptyRowNode = <V extends Value>(
   editor: PlateEditor<V>,
-  { header, colCount }: TablePluginOptions & { colCount: number }
+  { colCount, ...options }: GetEmptyRowNodeOptions = {}
 ) => {
   return {
     type: getPluginType(editor, ELEMENT_TR),
     children: Array(colCount)
       .fill(colCount)
-      .map(() => getEmptyCellNode(editor, { header })),
+      .map(() => getEmptyCellNode(editor, options)),
   };
 };

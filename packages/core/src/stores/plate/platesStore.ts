@@ -1,20 +1,20 @@
-import { createStore } from '@udecode/zustood';
 import { castArray } from 'lodash';
-import { isUndefined } from '../../common/utils/types.utils';
-import { PlateProps } from '../../components/Plate';
+import { PlateProps } from '../../components/plate/Plate';
 import { Value } from '../../slate/editor/TEditor';
-import { PlateEditor } from '../../types/PlateEditor';
+import { PlateEditor } from '../../types/plate/PlateEditor';
 import {
   PlatesStoreState,
   PlateStoreApi,
   PlateStoreState,
-} from '../../types/PlateStore';
+} from '../../types/plate/PlateStore';
+import { createStore } from '../../utils/index';
+import { isUndefined } from '../../utils/misc/type-utils';
 import { eventEditorActions } from '../event-editor/event-editor.store';
 import { createPlateStore } from './createPlateStore';
 import { getPlateStore, usePlateStore } from './usePlateStore';
 
 export const setPlateState = <
-  V extends Value,
+  V extends Value = Value,
   E extends PlateEditor<V> = PlateEditor<V>
 >(
   draft: Partial<PlateStoreState<V, E>>,
@@ -48,9 +48,9 @@ export const setPlateState = <
  * Plates store.
  */
 export const createPlatesStore = (
-  initialState: Partial<PlatesStoreState<Value>> = {}
+  initialState: Partial<PlatesStoreState> = {}
 ) =>
-  createStore('plate')(initialState as PlatesStoreState<Value>)
+  createStore('plate')(initialState as PlatesStoreState)
     .extendActions((set) => ({
       /**
        * Set state by id.
@@ -58,7 +58,7 @@ export const createPlatesStore = (
        * If the store is already set, it will be updated.
        */
       // eslint-disable-next-line prettier/prettier
-      set: <V extends Value, E extends PlateEditor<V> = PlateEditor<V>>(id: string, state?: PlateProps<V, E>) => {
+      set: <V extends Value = Value, E extends PlateEditor<V> = PlateEditor<V>>(id: string, state?: PlateProps<V, E>) => {
         set.state((draft) => {
           if (!id) return;
 
@@ -86,7 +86,7 @@ export const createPlatesStore = (
     }))
     .extendSelectors((state) => ({
       // eslint-disable-next-line prettier/prettier
-      get<V extends Value, E extends PlateEditor<V> = PlateEditor<V>,>(id: string) {
+      get<V extends Value = Value, E extends PlateEditor<V> = PlateEditor<V>,>(id: string) {
         return (state[id] as any) as PlateStoreApi<V, E>;
       },
       has(id?: string | string[]) {
@@ -103,19 +103,19 @@ export const platesSelectors = platesStore.get;
 export const usePlatesSelectors = platesStore.use;
 
 export const getPlateActions = <
-  V extends Value,
+  V extends Value = Value,
   E extends PlateEditor<V> = PlateEditor<V>
 >(
   id?: string
 ) => getPlateStore<V, E>(id).set;
 export const getPlateSelectors = <
-  V extends Value,
+  V extends Value = Value,
   E extends PlateEditor<V> = PlateEditor<V>
 >(
   id?: string
 ) => getPlateStore<V, E>(id).get;
 export const usePlateSelectors = <
-  V extends Value,
+  V extends Value = Value,
   E extends PlateEditor<V> = PlateEditor<V>
 >(
   id?: string

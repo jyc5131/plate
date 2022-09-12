@@ -1,16 +1,12 @@
-import React, { useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { findNodePath, Value } from '@udecode/plate-core';
 import { getRootProps } from '@udecode/plate-styled-components';
-import {
-  ELEMENT_TABLE,
-  getTableColumnIndex,
-  setTableColSize,
-} from '@udecode/plate-table';
+import { getTableColumnIndex, setTableColSize } from '@udecode/plate-table';
 import clsx from 'clsx';
-import { useAtom } from 'jotai';
 import { HandleStyles, Resizable, ResizableProps } from 're-resizable';
 import { useReadOnly } from 'slate-react';
-import { hoveredColIndexAtom, resizingColAtom } from '../table.atoms';
+import { useIsCellSelected } from '../hooks/useIsCellSelected';
+import { useTableStore } from '../table.atoms';
 import { getTableCellElementStyles } from './TableCellElement.styles';
 import { TableCellElementProps } from './TableCellElement.types';
 
@@ -30,11 +26,17 @@ export const TableCellElement = <V extends Value>(
   const rootProps = getRootProps(props);
   const readOnly = useReadOnly();
 
-  const [hoveredColIndex, setHoveredColIndex] = useAtom(
-    hoveredColIndexAtom,
-    ELEMENT_TABLE
-  );
-  const [, setResizingCol] = useAtom(resizingColAtom, ELEMENT_TABLE);
+  const [
+    hoveredColIndex,
+    setHoveredColIndex,
+  ] = useTableStore().use.hoveredColIndex();
+  const setResizingCol = useTableStore().set.resizingCol();
+
+  useEffect(() => {
+    setHoveredColIndex(null);
+  }, [element, setHoveredColIndex]);
+
+  const isCellSelected = useIsCellSelected(element);
 
   const handleResize: HandleStyles | undefined =
     ignoreReadOnly || !readOnly
@@ -47,19 +49,18 @@ export const TableCellElement = <V extends Value>(
         }
       : undefined;
 
-  const colIndex = useMemo(
-    () => getTableColumnIndex(editor, { node: element }),
-    [editor, element]
-  );
+  const colIndex = getTableColumnIndex(editor, { node: element });
 
   const {
     root,
     content,
     resizableWrapper,
     resizable,
+    selectedCell,
     handle,
   } = getTableCellElementStyles({
     ...props,
+    selected: isCellSelected,
     hovered: hoveredColIndex === colIndex,
     readOnly: !ignoreReadOnly && readOnly,
   });
@@ -79,6 +80,7 @@ export const TableCellElement = <V extends Value>(
     );
 
     setResizingCol(null);
+    setHoveredColIndex(null);
   };
 
   return (
@@ -116,6 +118,12 @@ export const TableCellElement = <V extends Value>(
 
         <div css={handle?.css} className={handle?.className} />
       </div>
+
+      <div
+        css={selectedCell?.css}
+        className={selectedCell?.className}
+        contentEditable={false}
+      />
     </td>
   );
 };

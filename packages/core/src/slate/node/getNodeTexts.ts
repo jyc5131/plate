@@ -1,5 +1,5 @@
-import { Node } from 'slate';
-import { Modify } from '../../common/types/utility/types';
+import { Node, NodeTextsOptions } from 'slate';
+import { Modify } from '../../types/misc/types';
 import { TextOf } from '../text/TText';
 import { NodeOf, TNode } from './TNode';
 import { TNodeEntry } from './TNodeEntry';
@@ -10,7 +10,7 @@ import { TNodeEntry } from './TNodeEntry';
 export const getNodeTexts = <N extends TextOf<R>, R extends TNode = TNode>(
   root: R,
   options?: Modify<
-    NonNullable<Parameters<typeof Node.texts>[1]>,
+    NonNullable<NodeTextsOptions>,
     {
       pass?: (entry: TNodeEntry<NodeOf<N>>) => boolean;
     }

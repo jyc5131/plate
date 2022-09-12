@@ -1,4 +1,5 @@
-import { createStore, StateActions, StoreApi } from '@udecode/zustood';
+import { createStore, StateActions, StoreApi } from '@udecode/plate-core';
+import { UseVirtualFloatingOptions } from '@udecode/plate-floating';
 import { Range } from 'slate';
 import { ComboboxOnSelectItem, NoData, TComboboxItem } from './types';
 
@@ -13,6 +14,13 @@ export type ComboboxStateById<TData = NoData> = {
    * @default (value) => value.text.toLowerCase().startsWith(search.toLowerCase())
    */
   filter?: (search: string) => (item: TComboboxItem<TData>) => boolean;
+
+  /**
+   * Sort filtered items before applying maxSuggestions.
+   */
+  sort?: (
+    search: string
+  ) => (a: TComboboxItem<TData>, b: TComboboxItem<TData>) => number;
 
   /**
    * Max number of items.
@@ -75,15 +83,9 @@ export type ComboboxState<TData = NoData> = {
   highlightedIndex: number;
 
   /**
-   * Parent element of the popper element (the one that has the scroll).
-   * @default document
+   * Overrides `useFloating` options.
    */
-  popperContainer?: Document | HTMLElement;
-
-  /**
-   * Overrides `usePopper` options.
-   */
-  popperOptions?: any;
+  floatingOptions: Partial<UseVirtualFloatingOptions>;
 
   /**
    * Range from the trigger to the cursor.
@@ -102,6 +104,7 @@ const createComboboxStore = (state: ComboboxStateById) =>
 export const comboboxStore = createStore('combobox')<ComboboxState>({
   activeId: null,
   byId: {},
+  floatingOptions: {},
   highlightedIndex: 0,
   items: [],
   filteredItems: [],

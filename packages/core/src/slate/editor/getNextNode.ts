@@ -1,11 +1,12 @@
-import { Editor } from 'slate';
-import { Modify } from '../../common/types/utility/types';
+import { Editor, EditorNextOptions } from 'slate';
+import { Modify } from '../../types/misc/types';
+import { TDescendant } from '../node/index';
 import { ENode, TNodeMatch } from '../node/TNode';
 import { TNodeEntry } from '../node/TNodeEntry';
 import { TEditor, Value } from './TEditor';
 
-export type GetNextNodeOptions<V extends Value> = Modify<
-  NonNullable<Parameters<typeof Editor.next>[1]>,
+export type GetNextNodeOptions<V extends Value = Value> = Modify<
+  NonNullable<EditorNextOptions<TDescendant>>,
   {
     match?: TNodeMatch<ENode<V>>;
   }
