@@ -1,5 +1,27 @@
 # @udecode/plate-headless
 
+## 18.1.0
+
+## 18.0.0
+
+### Major Changes
+
+- [#1889](https://github.com/udecode/plate/pull/1889) by [@zbeyens](https://github.com/zbeyens) –
+  - `@udecode/plate-selection` package moved out from `@udecode/plate` because of https://github.com/Simonwep/selection/issues/124
+  - Migration:
+    - If not using `createBlockSelectionPlugin`, no migration is needed.
+    - Otherwise, install `@udecode/plate-selection` and import `createBlockSelectionPlugin` from that package.
+
+## 17.0.3
+
+## 17.0.2
+
+## 17.0.1
+
+## 17.0.0
+
+## 16.9.1
+
 ## 16.9.0
 
 ## 16.8.1

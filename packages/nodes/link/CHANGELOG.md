@@ -1,5 +1,26 @@
 # @udecode/plate-link
 
+## 18.1.0
+
+### Minor Changes
+
+- [#1892](https://github.com/udecode/plate/pull/1892) by [@zakishaheen](https://github.com/zakishaheen) – Wrap valid link in anchor element when inserting a break
+
+## 17.0.3
+
+## 17.0.2
+
+## 17.0.1
+
+## 17.0.0
+
+## 16.9.1
+
+### Patch Changes
+
+- [#1868](https://github.com/udecode/plate/pull/1868) by [@rawi96](https://github.com/rawi96) –
+  - `upsertLink()` Set nodes also if only the link target has changed.
+
 ## 16.9.0
 
 ### Minor Changes

@@ -6,7 +6,6 @@ import {
   createAlignPlugin,
   createAutoformatPlugin,
   createBlockquotePlugin,
-  createBlockSelectionPlugin,
   createBoldPlugin,
   createCodeBlockPlugin,
   createCodePlugin,
@@ -44,12 +43,12 @@ import {
   createTodoListPlugin,
   createTrailingBlockPlugin,
   createUnderlinePlugin,
-  ELEMENT_CODE_BLOCK,
   MentionCombobox,
   Plate,
-  StyledElement,
+  PlateProvider,
 } from '@udecode/plate';
 import { createJuicePlugin } from '@udecode/plate-juice';
+import { createBlockSelectionPlugin } from '@udecode/plate-selection';
 import {
   createExcalidrawPlugin,
   ELEMENT_EXCALIDRAW,
@@ -84,7 +83,6 @@ import { ToolbarButtons } from './ToolbarButtons';
 
 let components = createPlateUI({
   [ELEMENT_EXCALIDRAW]: ExcalidrawElement,
-  [ELEMENT_CODE_BLOCK]: StyledElement,
   // customize your components by plugin key
 });
 components = withStyledPlaceHolders(components);
@@ -157,23 +155,21 @@ const App = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <Toolbar>
-        <ToolbarButtons />
-      </Toolbar>
+      <PlateProvider<MyValue> initialValue={playgroundValue} plugins={plugins}>
+        <Toolbar>
+          <ToolbarButtons />
+        </Toolbar>
 
-      <div ref={containerRef} style={styles.container}>
-        <Plate<MyValue, MyEditor>
-          editableProps={editableProps}
-          initialValue={playgroundValue}
-          plugins={plugins}
-        >
-          <MarkBalloonToolbar />
+        <div ref={containerRef} style={styles.container}>
+          <Plate editableProps={editableProps}>
+            <MarkBalloonToolbar />
 
-          <MentionCombobox items={MENTIONABLES} />
+            <MentionCombobox items={MENTIONABLES} />
 
-          <CursorOverlayContainer containerRef={containerRef} />
-        </Plate>
-      </div>
+            <CursorOverlayContainer containerRef={containerRef} />
+          </Plate>
+        </div>
+      </PlateProvider>
     </DndProvider>
   );
 };
