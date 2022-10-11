@@ -1,5 +1,24 @@
 # @udecode/plate-core
 
+## 18.2.0
+
+### Minor Changes
+
+- [#1888](https://github.com/udecode/plate/pull/1888) by [@zbeyens](https://github.com/zbeyens) –
+  - new `PlatePlugin` property:
+    - `renderAboveSlate` – Render a component above `Slate`
+  - `id` is no longer required in plate hooks:
+    - `usePlateId()` is getting the closest editor id
+    - it's used in all store hooks if no store is found with the omitted id
+    - note that `id` is not needed if you don't have nested `Plate` / `PlateProvider`
+  - `id` prop change should remount `Plate`
+
+## 18.1.1
+
+### Patch Changes
+
+- [#1896](https://github.com/udecode/plate/pull/1896) by [@charrondev](https://github.com/charrondev) – Fix `PrevSelectionPlugin` event persistence on React 16.x
+
 ## 17.0.3
 
 ### Patch Changes
