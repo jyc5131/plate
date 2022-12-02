@@ -1,5 +1,27 @@
 # @udecode/plate-dnd
 
+## 18.13.0
+
+## 18.10.1
+
+### Patch Changes
+
+- [#1991](https://github.com/udecode/plate/pull/1991) by [@zbeyens](https://github.com/zbeyens) – fix
+
+## 18.9.0
+
+## 18.8.0
+
+### Minor Changes
+
+- [#1966](https://github.com/udecode/plate/pull/1966) by [@zbeyens](https://github.com/zbeyens) – dnd plugin - new options:
+  - `enableScroller`: this adds a scroll area at the top and bottom of the window so the document scrolls when the mouse drags over. If you have another scroll container, you can either keep it disabled or override the props so the scroll areas are correctly positioned.
+  - `scrollerProps`
+
+## 18.7.0
+
+## 18.6.0
+
 ## 18.2.0
 
 ## 18.1.1

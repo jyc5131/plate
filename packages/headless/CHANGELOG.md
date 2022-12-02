@@ -1,5 +1,48 @@
 # @udecode/plate-headless
 
+## 18.13.0
+
+### Minor Changes
+
+- [#1829](https://github.com/udecode/plate/pull/1829) by [@osamatanveer](https://github.com/osamatanveer) –
+  - new plugin: comments
+
+## 18.12.2
+
+## 18.11.2
+
+## 18.11.1
+
+### Patch Changes
+
+- [#2016](https://github.com/udecode/plate/pull/2016) by [@bojangles-m](https://github.com/bojangles-m) – chore: added emoji package
+
+## 18.11.0
+
+### Minor Changes
+
+- [#2007](https://github.com/udecode/plate/pull/2007) by [@bojangles-m](https://github.com/bojangles-m) – New plugin: emoji
+
+## 18.10.3
+
+## 18.10.1
+
+## 18.9.2
+
+## 18.9.1
+
+## 18.9.0
+
+## 18.8.1
+
+## 18.7.0
+
+## 18.6.0
+
+## 18.5.1
+
+## 18.5.0
+
 ## 18.3.1
 
 ## 18.3.0

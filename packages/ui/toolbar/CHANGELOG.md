@@ -1,5 +1,19 @@
 # @udecode/plate-toolbar
 
+## 18.13.0
+
+## 18.12.1
+
+### Patch Changes
+
+- [#2027](https://github.com/udecode/plate/pull/2027) by [@bojangles-m](https://github.com/bojangles-m) – Feat/floating UI toolbar dropdown
+
+## 18.9.0
+
+## 18.7.0
+
+## 18.6.0
+
 ## 18.2.0
 
 ## 18.1.1

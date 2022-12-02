@@ -25,6 +25,7 @@ import {
   ELEMENT_UL,
   MARK_BOLD,
   MARK_CODE,
+  MARK_COMMENT,
   MARK_HIGHLIGHT,
   MARK_ITALIC,
   MARK_KBD,
@@ -39,6 +40,7 @@ import {
 import { StyledElement, StyledLeaf } from '@udecode/plate-styled-components';
 import { BlockquoteElement } from '@udecode/plate-ui-block-quote';
 import { CodeLineElement, CodeSyntaxLeaf } from '@udecode/plate-ui-code-block';
+import { PlateCommentLeaf } from '@udecode/plate-ui-comments';
 import { HrElement } from '@udecode/plate-ui-horizontal-rule';
 import { LinkElement } from '@udecode/plate-ui-link';
 import { TodoListElement } from '@udecode/plate-ui-list';
@@ -161,7 +163,7 @@ export const createPlateUI = <T extends string = string>(
     [ELEMENT_PARAGRAPH]: withProps(StyledElement, {
       as: 'p',
       styles: {
-        root: tw`m-0 py-1 px-0`,
+        root: tw`px-0 py-1 m-0`,
       },
       prefixClassNames: 'p',
     }),
@@ -241,6 +243,7 @@ export const createPlateUI = <T extends string = string>(
     [MARK_SUBSCRIPT]: withProps(StyledLeaf, { as: 'sub' }),
     [MARK_SUPERSCRIPT]: withProps(StyledLeaf, { as: 'sup' }),
     [MARK_UNDERLINE]: withProps(StyledLeaf, { as: 'u' }),
+    [MARK_COMMENT]: PlateCommentLeaf,
   };
 
   if (overrideByKey) {

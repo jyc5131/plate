@@ -41,5 +41,7 @@ export const triggerFloatingLinkInsert = <V extends Value>(
   if (hasLink) return;
 
   floatingLinkActions.text(getEditorString(editor, editor.selection));
-  floatingLinkActions.show('insert');
+  floatingLinkActions.show('insert', editor.id);
+
+  return true;
 };

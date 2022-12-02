@@ -28,7 +28,7 @@ export const useFloatingLinkInsert = ({
   const editor = useEditorRef();
   const focused = useFocused();
   const mode = useFloatingLinkSelectors().mode();
-  const open = useFloatingLinkSelectors().open();
+  const open = useFloatingLinkSelectors().isOpen(editor.id);
 
   const { triggerFloatingLinkHotkeys } = getPluginOptions<LinkPlugin>(
     editor,
@@ -37,10 +37,10 @@ export const useFloatingLinkInsert = ({
 
   useHotkeys(
     triggerFloatingLinkHotkeys!,
-    () => {
-      triggerFloatingLinkInsert(editor, {
-        focused,
-      });
+    (e) => {
+      if (triggerFloatingLinkInsert(editor, { focused })) {
+        e.preventDefault();
+      }
     },
     {
       enableOnContentEditable: true,
@@ -48,14 +48,20 @@ export const useFloatingLinkInsert = ({
     [focused]
   );
 
-  const ref = useOnClickOutside(() => {
-    if (floatingLinkSelectors.mode() === 'insert') {
-      floatingLinkActions.hide();
-      focusEditor(editor, editor.selection!);
+  const ref = useOnClickOutside(
+    () => {
+      if (floatingLinkSelectors.mode() === 'insert') {
+        floatingLinkActions.hide();
+        focusEditor(editor, editor.selection!);
+      }
+    },
+    {
+      disabled: !open,
     }
-  });
+  );
 
   const { update, style, floating } = useVirtualFloatingLink({
+    editorId: editor.id,
     open: open && mode === 'insert',
     getBoundingClientRect: getSelectionBoundingClientRect,
     whileElementsMounted: () => {},

@@ -1,13 +1,14 @@
 import {
   applyDeepToNodes,
-  defaultsDeepToNodes,PlateEditor,
+  defaultsDeepToNodes,
+  PlateEditor,
   queryNode,
   someNode,
   TDescendant,
   TNode,
   TNodeEntry,
   Value,
-  WithPlatePlugin
+  WithPlatePlugin,
 } from '@udecode/plate-core';
 import cloneDeep from 'lodash/cloneDeep';
 import { NodeIdPlugin } from './createNodeIdPlugin';
@@ -63,15 +64,16 @@ export const withNodeId = <
       const node = cloneDeep(operation.node);
 
       // Delete ids from node that are already being used
-      applyDeepToNodes({ 
-        node, 
-        query, 
-        source: {}, 
-        apply: removeIdFromNodeIfDuplicate 
-      })
+      applyDeepToNodes({
+        node,
+        query,
+        source: {},
+        apply: removeIdFromNodeIfDuplicate,
+      });
 
       defaultsDeepToNodes({
         node,
+        path: operation.path,
         source: idPropsCreator,
         query,
       });
@@ -85,10 +87,10 @@ export const withNodeId = <
     if (operation.type === 'split_node') {
       const node = operation.properties as TNode;
 
-      // only for elements (node with a type) or all nodes if `filterText=false`
-      if (queryNode([node, []], query)) {
-        let id = operation.properties[idKey];
+      let id = operation.properties[idKey];
 
+      // only for elements (node with a type) or all nodes if `filterText=false`
+      if (queryNode([node, operation.path], query)) {
         /**
          * Create a new id if:
          * - the id in the new node is already being used in the editor or,
@@ -112,6 +114,11 @@ export const withNodeId = <
             [idKey]: id,
           },
         });
+      }
+
+      // if the node is allowed, we don't want to use the same id
+      if (id) {
+        delete operation.properties[idKey];
       }
     }
 

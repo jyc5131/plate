@@ -1,5 +1,18 @@
 # @udecode/plate-ui-button
 
+## 18.13.0
+
+### Minor Changes
+
+- [#1829](https://github.com/udecode/plate/pull/1829) by [@osamatanveer](https://github.com/osamatanveer) –
+  - `primaryButtonCss`
+
+## 18.9.0
+
+## 18.7.0
+
+## 18.6.0
+
 ## 18.2.0
 
 ## 18.1.1
