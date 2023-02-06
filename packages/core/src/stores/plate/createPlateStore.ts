@@ -17,7 +17,7 @@ import { isDefined, Scope, useAtom } from '../../utils/index';
  */
 export type PlateId = Scope;
 
-export const PLATE_SCOPE = Symbol('plate');
+export const PLATE_SCOPE = 'plate';
 export const GLOBAL_PLATE_SCOPE = Symbol('global-plate');
 
 export const plateIdAtom = atom(PLATE_SCOPE);
@@ -41,6 +41,7 @@ export const createPlateStore = <
   onChange = null,
   plugins = [],
   rawPlugins = [],
+  readOnly = false,
   renderElement = null,
   renderLeaf = null,
   value = null as any,
@@ -58,6 +59,7 @@ export const createPlateStore = <
       onChange,
       plugins,
       rawPlugins,
+      readOnly,
       renderElement,
       renderLeaf,
       value,

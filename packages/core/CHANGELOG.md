@@ -1,5 +1,86 @@
 # @udecode/plate-core
 
+## 19.4.4
+
+### Patch Changes
+
+- [#2194](https://github.com/udecode/plate/pull/2194) by [@zbeyens](https://github.com/zbeyens) – fix: `useElement` should not throw an error if the element is not found. It can happen when the document is not yet normalized. This patch replaces the `throw` by a `console.warn`.
+
+## 19.4.2
+
+### Patch Changes
+
+- [#2185](https://github.com/udecode/plate/pull/2185) by [@zbeyens](https://github.com/zbeyens) – fix: `getEditorString` should not throw an error when a node is not found. Returns an empty string in that case.
+
+## 19.2.0
+
+### Minor Changes
+
+- [#2156](https://github.com/udecode/plate/pull/2156) by [@12joan](https://github.com/12joan) – Trim \n characters from start and end of text nodes when deserializing HTML
+
+## 19.1.1
+
+### Patch Changes
+
+- [#2151](https://github.com/udecode/plate/pull/2151) by [@zbeyens](https://github.com/zbeyens) – fix: use `removeEditorMark` in editorProtocol plugin
+
+## 19.1.0
+
+### Minor Changes
+
+- [#2142](https://github.com/udecode/plate/pull/2142) by [@zbeyens](https://github.com/zbeyens) –
+  - New core plugin: `editorProtocol` following https://github.com/udecode/editor-protocol core specs
+    - Fixes https://github.com/udecode/editor-protocol/issues/81
+  - Slate types: replaced editor mark types by `string`. Derived types from `EMarks<V>` are often unusable.
+
+## 19.0.3
+
+### Patch Changes
+
+- [#2108](https://github.com/udecode/plate/pull/2108) by [@zbeyens](https://github.com/zbeyens) – Fixes #2107
+
+## 19.0.1
+
+### Patch Changes
+
+- [`8957172`](https://github.com/udecode/plate/commit/89571722d3e0e275af302cb4553e85f0edd0b912) by [@zbeyens](https://github.com/zbeyens) – fix: `editor.id` of type `Symbol`
+
+## 19.0.0
+
+### Major Changes
+
+- [#2097](https://github.com/udecode/plate/pull/2097) by [@zbeyens](https://github.com/zbeyens) –
+  - upgrade deps, including typescript support for the new editor methods:
+  ```json
+  // from
+  "slate": "0.78.0",
+  "slate-history": "0.66.0",
+  "slate-react": "0.79.0"
+  // to
+  "slate": "0.87.0",
+  "slate-history": "0.86.0",
+  "slate-react": "0.88.0"
+  ```
+
+## 18.15.0
+
+### Minor Changes
+
+- [`2a72716`](https://github.com/udecode/plate/commit/2a7271665eeedc35b8b8f08f793d550503c7b85a) by [@zbeyens](https://github.com/zbeyens) –
+
+  - new `Plate` / `PlateProvider` prop: `readOnly`
+  - it's also stored in plate store, useful when `readOnly` is needed between `PlateProvider` and `Plate`.
+  - new selector: `usePlateReadOnly`
+  - (not mandatory) migration:
+
+  ```tsx
+  // from
+  <Plate editableProps={{readOnly: true}} />
+
+  // to
+  <Plate readOnly />
+  ```
+
 ## 18.13.0
 
 ### Minor Changes

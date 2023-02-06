@@ -1,5 +1,27 @@
 # @udecode/plate-placeholder
 
+## 19.4.4
+
+## 19.4.2
+
+### Patch Changes
+
+- [#2187](https://github.com/udecode/plate/pull/2187) by [@zbeyens](https://github.com/zbeyens) – fix: replace `useEditorState` by `usePlateEditorState` to support nested editors.
+
+## 19.2.0
+
+## 19.1.1
+
+## 19.1.0
+
+## 19.0.3
+
+## 19.0.1
+
+## 19.0.0
+
+## 18.15.0
+
 ## 18.13.0
 
 ## 18.9.0

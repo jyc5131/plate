@@ -1,5 +1,33 @@
 # @udecode/plate-table
 
+## 19.4.4
+
+## 19.4.2
+
+## 19.3.0
+
+### Patch Changes
+
+- [#2165](https://github.com/udecode/plate/pull/2165) by [@OliverWales](https://github.com/OliverWales) – Override setFragmentData for table range selections #2137
+
+## 19.2.0
+
+## 19.1.1
+
+## 19.1.0
+
+### Patch Changes
+
+- [#2142](https://github.com/udecode/plate/pull/2142) by [@zbeyens](https://github.com/zbeyens) – fix: pass `deleteFragment` params
+
+## 19.0.3
+
+## 19.0.1
+
+## 19.0.0
+
+## 18.15.0
+
 ## 18.13.0
 
 ### Patch Changes

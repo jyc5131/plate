@@ -1,5 +1,77 @@
 # @udecode/plate
 
+## 19.4.4
+
+## 19.4.3
+
+## 19.4.2
+
+## 19.4.1
+
+## 19.4.0
+
+## 19.3.0
+
+## 19.2.0
+
+## 19.1.1
+
+## 19.1.0
+
+## 19.0.7
+
+## 19.0.6
+
+## 19.0.5
+
+## 19.0.4
+
+## 19.0.3
+
+## 19.0.2
+
+## 19.0.1
+
+## 19.0.0
+
+### Major Changes
+
+- [#2097](https://github.com/udecode/plate/pull/2097) by [@zbeyens](https://github.com/zbeyens) –
+  - due to esm issues, dnd plugin is not part of plate package anymore. To use it, install `@udecode/plate-ui-dnd`
+  ```ts
+  // before
+  import { createDndPlugin } from '@udecode/plate';
+  // after
+  import { createDndPlugin } from '@udecode/plate-ui-dnd';
+  ```
+  - upgrade peerDeps:
+  ```json
+  // from
+  "slate": ">=0.78.0",
+  "slate-history": ">=0.66.0",
+  "slate-react": ">=0.79.0"
+  // to
+  "slate": ">=0.87.0",
+  "slate-history": ">=0.86.0",
+  "slate-react": ">=0.88.0"
+  ```
+
+## 18.15.0
+
+## 18.14.4
+
+## 18.14.3
+
+## 18.14.2
+
+## 18.14.1
+
+## 18.14.0
+
+## 18.13.2
+
+## 18.13.1
+
 ## 18.13.0
 
 ### Minor Changes

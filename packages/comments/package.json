@@ -1,6 +1,6 @@
 {
   "name": "@udecode/plate-comments",
-  "version": "18.13.0",
+  "version": "19.4.4",
   "description": "Plate plugin for comments",
   "license": "MIT",
   "homepage": "https://plate.udecode.io",
@@ -19,15 +19,15 @@
   ],
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@udecode/plate-button": "18.13.0",
-    "@udecode/plate-core": "18.13.0"
+    "@udecode/plate-button": "19.4.4",
+    "@udecode/plate-core": "19.4.4"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
-    "slate": ">=0.66.1",
-    "slate-history": ">=0.66.0",
-    "slate-react": ">=0.74.2"
+    "slate": ">=0.87.0",
+    "slate-history": ">=0.86.0",
+    "slate-react": ">=0.88.0"
   },
   "keywords": [
     "plate",

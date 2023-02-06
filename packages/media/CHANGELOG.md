@@ -1,5 +1,30 @@
 # @udecode/plate-media
 
+## 19.4.4
+
+## 19.4.2
+
+## 19.2.0
+
+## 19.1.1
+
+## 19.1.0
+
+## 19.0.3
+
+## 19.0.1
+
+## 19.0.0
+
+## 18.15.0
+
+## 18.13.1
+
+### Patch Changes
+
+- [`37a3c03`](https://github.com/udecode/plate/commit/37a3c038a4ac298a12013a9ba46dacfa57415e4f) by [@zbeyens](https://github.com/zbeyens) –
+  - fix: `parseTwitterUrl` undefined check on `url`
+
 ## 18.13.0
 
 ## 18.9.0

@@ -3,6 +3,7 @@ import {
   findNode,
   focusEditor,
   getEndPoint,
+  isEditorReadOnly,
   PlateEditor,
   removeNodes,
   Value,
@@ -36,6 +37,8 @@ export const useHooksBlockSelection = <
     if (el) {
       document.body.removeChild(el);
     }
+
+    const isReadonly = isEditorReadOnly(editor);
 
     if (isSelecting) {
       const input = document.createElement('input');
@@ -85,13 +88,11 @@ export const useHooksBlockSelection = <
           }
         }
 
-        if (isHotkey(['backspace', 'delete'])(e)) {
+        if (isHotkey(['backspace', 'delete'])(e) && !isReadonly) {
           removeNodes(editor, {
             at: [],
             match: (n) => blockSelectionSelectors.selectedIds().has(n.id),
           });
-
-          blockSelectionActions.resetSelectedIds();
         }
       };
 
@@ -109,16 +110,20 @@ export const useHooksBlockSelection = <
         if (blockSelectionSelectors.isSelectingSome()) {
           copySelectedBlocks(editor);
 
-          removeNodes(editor, {
-            at: [],
-            match: (n) => blockSelectionSelectors.selectedIds().has(n.id),
-          });
+          if (!isReadonly) {
+            removeNodes(editor, {
+              at: [],
+              match: (n) => blockSelectionSelectors.selectedIds().has(n.id),
+            });
+          }
         }
       };
       input.onpaste = (e) => {
         e.preventDefault();
 
-        pasteSelectedBlocks(editor, e);
+        if (!isReadonly) {
+          pasteSelectedBlocks(editor, e);
+        }
       };
       document.body.appendChild(input);
       input.focus();

@@ -1,5 +1,25 @@
 # @udecode/plate-table-ui
 
+## 19.4.4
+
+## 19.4.2
+
+## 19.3.0
+
+## 19.2.0
+
+## 19.1.1
+
+## 19.1.0
+
+## 19.0.3
+
+## 19.0.1
+
+## 19.0.0
+
+## 18.15.0
+
 ## 18.13.0
 
 ## 18.12.1
@@ -47,6 +67,7 @@
 - [#1800](https://github.com/udecode/plate/pull/1800) by [@zbeyens](https://github.com/zbeyens) – Light breaking changes:
   - `TableElementBase` has been removed for `TableElement`
   - in v16, `TableElement` `onRenderContainer` prop has been removed for `floatingOptions`. However, `TablePopover` has other props which you may want to control. So this release adds `popoverProps` prop has been added and `floatingOptions` prop is moved into `popoverProps.floatingOptions`.
+  - Instead of using `onRenderContainer`, replace `ELEMENT_TABLE` in the `createPlateUI` function.
 
 ## 16.3.0
 

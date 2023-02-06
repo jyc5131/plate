@@ -1,5 +1,49 @@
 # @udecode/plate-md-serializer
 
+## 19.4.4
+
+## 19.4.3
+
+## 19.4.2
+
+## 19.4.1
+
+## 19.4.0
+
+### Minor Changes
+
+- [#2175](https://github.com/udecode/plate/pull/2175) by [@12joan](https://github.com/12joan) –
+  - Plugin can now be customised using `elementRules` and `textRules` options
+  - Various fixes
+
+## 19.3.0
+
+## 19.2.0
+
+## 19.1.1
+
+## 19.1.0
+
+## 19.0.6
+
+### Patch Changes
+
+- [#2124](https://github.com/udecode/plate/pull/2124) by [@zbeyens](https://github.com/zbeyens) – Fix: Revert "Remove unnecessary query in deserialize markdown" to fix internal slate copy/pasting
+
+## 19.0.5
+
+### Patch Changes
+
+- [#2115](https://github.com/udecode/plate/pull/2115) by [@neko-neko](https://github.com/neko-neko) – Fix markdown string to Node conversion process not working properly in markdown string pasting.
+
+## 19.0.3
+
+## 19.0.1
+
+## 19.0.0
+
+## 18.15.0
+
 ## 18.13.0
 
 ## 18.12.2

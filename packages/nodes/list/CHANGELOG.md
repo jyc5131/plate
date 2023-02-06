@@ -1,5 +1,33 @@
 # @udecode/plate-list
 
+## 19.4.4
+
+## 19.4.2
+
+## 19.4.1
+
+### Patch Changes
+
+- [#2180](https://github.com/udecode/plate/pull/2180) by [@12joan](https://github.com/12joan) – Ignore defaultPrevented keydown event
+
+## 19.2.0
+
+## 19.1.1
+
+## 19.1.0
+
+### Patch Changes
+
+- [#2141](https://github.com/udecode/plate/pull/2141) by [@12joan](https://github.com/12joan) – Fix crash when deleting line ending in \n
+
+## 19.0.3
+
+## 19.0.1
+
+## 19.0.0
+
+## 18.15.0
+
 ## 18.13.0
 
 ## 18.9.2

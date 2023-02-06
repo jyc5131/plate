@@ -3,6 +3,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import {
   AutoformatPlugin,
+  CodeBlockElement,
   createAlignPlugin,
   createAutoformatPlugin,
   createBlockquotePlugin,
@@ -14,7 +15,7 @@ import {
   createDeserializeCsvPlugin,
   createDeserializeDocxPlugin,
   createDeserializeMdPlugin,
-  createDndPlugin,
+  createEmojiPlugin,
   createExitBreakPlugin,
   createFontBackgroundColorPlugin,
   createFontColorPlugin,
@@ -44,6 +45,7 @@ import {
   createTodoListPlugin,
   createTrailingBlockPlugin,
   createUnderlinePlugin,
+  ELEMENT_CODE_BLOCK,
   MentionCombobox,
   Plate,
   PlateFloatingComments,
@@ -51,6 +53,7 @@ import {
 } from '@udecode/plate';
 import { createJuicePlugin } from '@udecode/plate-juice';
 import { createBlockSelectionPlugin } from '@udecode/plate-selection';
+import { createDndPlugin } from '@udecode/plate-ui-dnd';
 import {
   createExcalidrawPlugin,
   ELEMENT_EXCALIDRAW,
@@ -64,6 +67,7 @@ import { editableProps } from './common/editableProps';
 import { CursorOverlayContainer } from './cursor-overlay/CursorOverlayContainer';
 import { dragOverCursorPlugin } from './cursor-overlay/dragOverCursorPlugin';
 import { withStyledDraggables } from './dnd/withStyledDraggables';
+import { emojiPlugin } from './emoji/emojiPlugin';
 import { exitBreakPlugin } from './exit-break/exitBreakPlugin';
 import { forcedLayoutPlugin } from './forced-layout/forcedLayoutPlugin';
 import { indentPlugin } from './indent/indentPlugin';
@@ -85,6 +89,7 @@ import { playgroundValue } from './playgroundValue';
 import { ToolbarButtons } from './ToolbarButtons';
 
 let components = createPlateUI({
+  [ELEMENT_CODE_BLOCK]: CodeBlockElement,
   [ELEMENT_EXCALIDRAW]: ExcalidrawElement,
   // customize your components by plugin key
 });
@@ -149,6 +154,7 @@ const App = () => {
           createDeserializeCsvPlugin(),
           createDeserializeDocxPlugin(),
           createJuicePlugin() as MyPlatePlugin,
+          createEmojiPlugin(emojiPlugin),
         ],
         {
           components: withStyledDraggables(components),

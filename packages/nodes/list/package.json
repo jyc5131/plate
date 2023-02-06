@@ -1,6 +1,6 @@
 {
   "name": "@udecode/plate-list",
-  "version": "18.13.0",
+  "version": "19.4.4",
   "description": "List plugin for Plate",
   "license": "MIT",
   "homepage": "https://plate.udecode.io",
@@ -19,15 +19,15 @@
   ],
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@udecode/plate-core": "18.13.0",
-    "@udecode/plate-reset-node": "18.13.0"
+    "@udecode/plate-core": "19.4.4",
+    "@udecode/plate-reset-node": "19.4.4"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0",
-    "slate": ">=0.78.0",
-    "slate-history": ">=0.66.0",
-    "slate-react": ">=0.79.0"
+    "slate": ">=0.87.0",
+    "slate-history": ">=0.86.0",
+    "slate-react": ">=0.88.0"
   },
   "keywords": [
     "plate",

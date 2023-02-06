@@ -10,7 +10,10 @@ import {
   useComboboxControls,
   useComboboxSelectors,
 } from '@udecode/plate-combobox';
-import { useEditorState, useEventEditorSelectors } from '@udecode/plate-core';
+import {
+  useEventEditorSelectors,
+  usePlateEditorState,
+} from '@udecode/plate-core';
 import {
   flip,
   getRangeBoundingClientRect,
@@ -41,7 +44,7 @@ const ComboboxContent = <TData extends Data = NoData>(
   const filteredItems = useComboboxSelectors.filteredItems();
   const highlightedIndex = useComboboxSelectors.highlightedIndex();
   const floatingOptions = useComboboxSelectors.floatingOptions();
-  const editor = useEditorState();
+  const editor = usePlateEditorState();
   const combobox = useComboboxControls();
   const activeComboboxStore = useActiveComboboxStore()!;
   const text = useComboboxSelectors.text() ?? '';
@@ -115,7 +118,7 @@ const ComboboxContent = <TData extends Data = NoData>(
               key={item.key}
               css={!highlighted ? styleItem?.css : highlightedItem?.css}
               className={
-                !highlighted ? styleItem?.className : highlightedItem?.css
+                !highlighted ? styleItem?.className : highlightedItem?.className
               }
               {...combobox.getItemProps({
                 item,
@@ -159,7 +162,7 @@ export const Combobox = <TData extends Data = NoData>({
   const storeItems = useComboboxSelectors.items();
   const disabled = _disabled ?? (!storeItems.length && !props.items?.length);
 
-  const editor = useEditorState();
+  const editor = usePlateEditorState();
   const focusedEditorId = useEventEditorSelectors.focus?.();
   const combobox = useComboboxControls();
   const activeId = useComboboxSelectors.activeId();
