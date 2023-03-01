@@ -1,5 +1,37 @@
 # @udecode/plate-toolbar
 
+## 19.7.0
+
+### Patch Changes
+
+- [#2231](https://github.com/udecode/plate/pull/2231) by [@12joan](https://github.com/12joan) – Fix mark toolbar button not applying mark properly
+
+## 19.6.0
+
+### Minor Changes
+
+- [#2212](https://github.com/udecode/plate/pull/2212) by [@TomMorane](https://github.com/TomMorane) –
+  - default aria-label = tooltip content
+
+### Patch Changes
+
+- [#2212](https://github.com/udecode/plate/pull/2212) by [@TomMorane](https://github.com/TomMorane) –
+  - Fixes #1603
+
+## 19.5.0
+
+### Minor Changes
+
+- [#2202](https://github.com/udecode/plate/pull/2202) by [@zbeyens](https://github.com/zbeyens) – Replace onMouseDown by onClick. Add aria-label.
+
+- [#2202](https://github.com/udecode/plate/pull/2202) by [@zbeyens](https://github.com/zbeyens) –
+
+  - Replace arrow from true to false
+  - Replace delay from 0 to 500
+  - Replace <span> by <button>
+
+- [#2202](https://github.com/udecode/plate/pull/2202) by [@zbeyens](https://github.com/zbeyens) – New prop: Handler to use to actionate the button. Default: onClick
+
 ## 19.4.4
 
 ## 19.4.2

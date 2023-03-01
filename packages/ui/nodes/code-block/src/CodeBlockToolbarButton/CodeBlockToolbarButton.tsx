@@ -5,8 +5,8 @@ import {
   insertEmptyCodeBlock,
 } from '@udecode/plate-code-block';
 import {
+  focusEditor,
   getPluginType,
-  getPreventDefaultHandler,
   useEventPlateId,
   usePlateEditorState,
   Value,
@@ -27,11 +27,19 @@ export const CodeBlockToolbarButton = <V extends Value>({
 
   return (
     <BlockToolbarButton
+      tooltip={{ content: 'Code Block' }}
       type={getPluginType(editor, ELEMENT_CODE_BLOCK)}
-      onMouseDown={getPreventDefaultHandler(insertEmptyCodeBlock, editor, {
-        insertNodesOptions: { select: true },
-        ...options,
-      })}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        insertEmptyCodeBlock(editor, {
+          insertNodesOptions: { select: true },
+          ...options,
+        });
+
+        focusEditor(editor);
+      }}
       {...props}
     />
   );

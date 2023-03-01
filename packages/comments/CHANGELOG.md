@@ -1,5 +1,17 @@
 # @udecode/plate-comments
 
+## 19.7.0
+
+### Patch Changes
+
+- [#2225](https://github.com/udecode/plate/pull/2225) by [@TomMorane](https://github.com/TomMorane) – fix: hotkey
+
+## 19.5.0
+
+### Minor Changes
+
+- [#2202](https://github.com/udecode/plate/pull/2202) by [@zbeyens](https://github.com/zbeyens) – Replace onMouseDown by onClick. Add aria-label.
+
 ## 19.4.4
 
 ## 19.4.2

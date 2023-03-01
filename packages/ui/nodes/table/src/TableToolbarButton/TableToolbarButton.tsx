@@ -1,7 +1,7 @@
 import React from 'react';
 import {
+  focusEditor,
   getPluginType,
-  getPreventDefaultHandler,
   someNode,
   useEventPlateId,
   usePlateEditorState,
@@ -19,20 +19,19 @@ export const TableToolbarButton = <V extends Value>({
 }: TableToolbarButtonProps<V>) => {
   const editor = usePlateEditorState<V>(useEventPlateId(id));
   const type = getPluginType(editor, ELEMENT_TABLE);
+  const active = !!editor?.selection && someNode(editor, { match: { type } });
 
   return (
     <ToolbarButton
-      active={
-        !!editor?.selection &&
-        someNode(editor, {
-          match: { type },
-        })
-      }
-      onMouseDown={
-        !!type && editor
-          ? getPreventDefaultHandler(transform, editor, { header })
-          : undefined
-      }
+      active={active}
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        transform(editor, { header });
+
+        focusEditor(editor);
+      }}
       {...props}
     />
   );
