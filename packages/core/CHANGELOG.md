@@ -1,5 +1,16 @@
 # @udecode/plate-core
 
+## 20.0.0
+
+### Major Changes
+
+- [`00774029`](https://github.com/udecode/plate/commit/00774029236d37737abdadf49b074e613e290792) by [@zbeyens](https://github.com/zbeyens) – Remove `getPreventDefaultHandler` since it is no longer needed.
+
+### Minor Changes
+
+- [#2240](https://github.com/udecode/plate/pull/2240) by [@OliverWales](https://github.com/OliverWales) –
+  - Add `sanitizeUrl` util to check if URL has an allowed scheme
+
 ## 19.7.0
 
 ### Minor Changes
